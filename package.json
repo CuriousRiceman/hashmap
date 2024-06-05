@@ -1,0 +1,16 @@
+{
+  "name": "hashmap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hashmap.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "hash": "npx nodemon hashmap.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  },
+  "type": "module"
+}
