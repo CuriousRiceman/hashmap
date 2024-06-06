@@ -96,6 +96,7 @@ export class LinkedList {
         while (tempHead !== null) {
             process.stdout.write("( " + tempHead.value + " ) -> "); // process.stdout.write will make it print on same line
             tempHead = tempHead.nextNode;
+            
         }
         process.stdout.write("" + tempHead);
     }

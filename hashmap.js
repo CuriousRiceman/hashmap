@@ -25,7 +25,19 @@ class HashMap {
       }
     }
     get(key) {
-
+      let hashedKey = this.hash(key);
+      if (this.arrayOfLinkedLists[hashedKey] !== undefined) {
+        let tempHead = this.arrayOfLinkedLists[hashedKey].head;
+        while (tempHead !== null) {
+          if (tempHead.key === key) {
+            return "Key found: " + tempHead.value;
+          } else {
+            tempHead = tempHead.nextNode;
+          }
+        }
+      } else {
+        return "Key not found: " + null;
+      }
     }
     has(key) {
 
@@ -65,6 +77,13 @@ class HashMap {
 const hashMap = new HashMap;
 hashMap.set("hi", 3); // Index 1, use the word "hi", add 2 "i" to get same hash code for testing
 hashMap.set("hiii", 6);
-console.log(hashMap.hash("hiii"));
-console.log(hashMap.arrayOfLinkedLists[1]);
+hashMap.set("hiiiii", 8);
+hashMap.set("hiiiiiii", 10);
+// console.log(hashMap.hash("hiii"));
+
 console.log(hashMap.entries());
+hashMap.arrayOfLinkedLists[1].toString();
+
+console.log();
+console.log(hashMap.get("h")); // null
+console.log(hashMap.get("hiii")); // 5
