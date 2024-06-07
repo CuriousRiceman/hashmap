@@ -40,10 +40,37 @@ class HashMap {
       }
     }
     has(key) {
-
+      let hashedKey = this.hash(key);
+      if (this.arrayOfLinkedLists[hashedKey] !== undefined) {
+        let tempHead = this.arrayOfLinkedLists[hashedKey].head;
+        while (tempHead !== null) {
+          if (tempHead.key === key) {
+            return true;
+          } else {
+            tempHead = tempHead.nextNode;
+          }
+        }
+      } else {
+        return false;
+      }
     }
     remove(key) {
-
+      let hashedKey = this.hash(key);
+      if (this.arrayOfLinkedLists[hashedKey] !== undefined) {
+        let tempHead = this.arrayOfLinkedLists[hashedKey].head;
+        let indexOfKey = 0;
+        while (tempHead !== null) {
+          if (tempHead.key === key) { // Refactored the removeAt() method of the linked list instead
+            this.arrayOfLinkedLists[hashedKey].removeAt(indexOfKey);
+            return true;
+          } else {
+            indexOfKey++;
+            tempHead = tempHead.nextNode;
+          }
+        }
+      } else {
+        return false;
+      }
     }
     length() {
 
@@ -81,9 +108,13 @@ hashMap.set("hiiiii", 8);
 hashMap.set("hiiiiiii", 10);
 // console.log(hashMap.hash("hiii"));
 
+// console.log(hashMap.get("h")); // null
+// console.log(hashMap.get("hiii")); // 5
+// console.log("Has key? " + hashMap.has("hi")); // true
+// console.log("Has key? " + hashMap.has("hii")); // false
+// console.log(hashMap.remove("hiiiii")); // true
+
 console.log(hashMap.entries());
 hashMap.arrayOfLinkedLists[1].toString();
 
 console.log();
-console.log(hashMap.get("h")); // null
-console.log(hashMap.get("hiii")); // 5

@@ -35,7 +35,7 @@ export class LinkedList {
             this.tail = data;
         }
     }
-    at(index) { // Get(key)
+    at(key) { // Get(key)
         let tempHead = this.head;
         let instance = 0;
         while(tempHead !== null && instance < index) {
@@ -67,18 +67,26 @@ export class LinkedList {
         }
 
     }
-    removeAt(index) {
-        let tempHead = this.head;
+    removeAt(indexOfKey) {
         let indexToMatch = 0;
-        let previousNode = null;
-        let followingNode = null;
-        while (index > indexToMatch) {
-            indexToMatch++;
-            previousNode = tempHead;
-            tempHead = tempHead.nextNode;
-            followingNode = tempHead.nextNode;
+        if (indexOfKey === 0) { // Get rid of first element
+            this.head = this.head.nextNode; 
+        } else if (indexOfKey > indexToMatch) {
+            let tempHead = this.head;
+            let previousNode = null;
+            let followingNode = null;
+            while (indexOfKey > indexToMatch) {
+                indexToMatch++;
+                previousNode = tempHead;
+                tempHead = tempHead.nextNode;
+                followingNode = tempHead.nextNode;
+            }
+            if (followingNode !== null) { // Get rid of an element in middle of two elements
+                previousNode.nextNode = followingNode;
+            } else { // Scenario to get rid of last element
+                previousNode.nextNode = null;
+            }
         }
-        previousNode.nextNode = followingNode;
     }
     getSize() { // length() of hash map
         let length = 0;
