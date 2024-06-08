@@ -73,16 +73,48 @@ class HashMap {
       }
     }
     length() {
-
+      let storedKeys = 0;
+      let iteration = 0;
+      while (iteration < 16) {
+        if (this.arrayOfLinkedLists[iteration] !== undefined) {
+          let tempHead = this.arrayOfLinkedLists[iteration].head;
+          while (tempHead !== null) {
+            storedKeys++;
+            tempHead = tempHead.nextNode
+          }
+        }
+        iteration++;
+      }
+      return storedKeys;
     }
     clear() {
-
+      this.arrayOfLinkedLists = new Array(16);
     }
     keys() {
-
+      const keysArray = [];
+      this.arrayOfLinkedLists.forEach((list) => {
+        if (list !== undefined) {
+          let tempNode = list.head;
+          while (tempNode !== null) {
+            keysArray.push(tempNode.key);
+            tempNode = tempNode.nextNode;
+          }
+        }
+      });
+      return keysArray;
     }
     values() {
-
+      const valuesArray = [];
+      this.arrayOfLinkedLists.forEach((list) => {
+        if (list !== undefined) {
+          let tempNode = list.head;
+          while (tempNode !== null) {
+            valuesArray.push(tempNode.value);
+            tempNode = tempNode.nextNode;
+          }
+        }
+      });
+      return valuesArray;
     }
     entries() {
       const entriesArray = [];
@@ -106,15 +138,18 @@ hashMap.set("hi", 3); // Index 1, use the word "hi", add 2 "i" to get same hash 
 hashMap.set("hiii", 6);
 hashMap.set("hiiiii", 8);
 hashMap.set("hiiiiiii", 10);
+hashMap.set("by", 5);
+hashMap.set("ni hao", 10);
+hashMap.set("food", 1000);
 // console.log(hashMap.hash("hiii"));
-
 // console.log(hashMap.get("h")); // null
 // console.log(hashMap.get("hiii")); // 5
 // console.log("Has key? " + hashMap.has("hi")); // true
 // console.log("Has key? " + hashMap.has("hii")); // false
 // console.log(hashMap.remove("hiiiii")); // true
-
+// console.log(hashMap.length()); // 4 length
+// hashMap.clear(); // clear
 console.log(hashMap.entries());
-hashMap.arrayOfLinkedLists[1].toString();
-
 console.log();
+console.log(hashMap.keys());
+console.log(hashMap.values());
